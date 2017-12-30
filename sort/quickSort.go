@@ -12,7 +12,6 @@ func main() {
 func qSort(array []int, low, high int) {
 	if low < high {
 		m := partition(array, low, high)
-		// fmt.Println(m)
 		qSort(array, low, m-1)
 		qSort(array, m+1, high)
 	}
@@ -35,7 +34,6 @@ func partition(array []int, low, high int) int {
 		if tmpLow >= tmpHigh {
 			break
 		}
-		// swap(array[tmpLow], array[tmpHigh])
 		array[tmpLow], array[tmpHigh] = array[tmpHigh], array[tmpLow]
 		fmt.Println(array)
 	}
