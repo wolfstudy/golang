@@ -1,5 +1,13 @@
 package main
 
+import "fmt"
+
+func main() {
+	a := []int{34, 52, 12, 45, 56, 10, 35}
+	HeatSort(a)
+	fmt.Println(a)
+}
+
 //交换
 func swap(i, j int,a[] int)  {
 	a[i], a[j] = a[j], a[i];
