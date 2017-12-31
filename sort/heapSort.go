@@ -8,7 +8,7 @@ func main() {
 	fmt.Println(a)
 }
 
-//交换
+//交换函数
 func swap(i, j int,a[] int)  {
 	a[i], a[j] = a[j], a[i];
 }
