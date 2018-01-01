@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 func swap1 (i, j int,a []int)  {
 	a[i], a[j] = a[j], a[i]
 }
@@ -23,4 +25,11 @@ func ShellSort(a []int){
 
 		h /= 3
 	}
+}
+
+func main() {
+	s := []int{9,0,6,5,8,2,1,7,4,3}
+	fmt.Println(s)
+	ShellSort(s)
+	fmt.Println(s)
 }
