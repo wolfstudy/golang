@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 //求数据的最大位
 func maxBit (values []int) (ret int)  {
 	ret = 1 //保存最大位数
@@ -48,3 +50,10 @@ func radixSort(values []int) {
 	}
 }
 
+func main() {
+	values := []int{2, 4, 7, 5, 8, 1, 3, 6, 6}
+	fmt.Println(values)
+	radixSort(values)
+	fmt.Println(values)
+	return
+}
