@@ -52,8 +52,10 @@ func radixSort(values []int) {
 
 func main() {
 	values := []int{2, 4, 7, 5, 8, 1, 3, 6, 6}
+	//排序前
 	fmt.Println(values)
 	radixSort(values)
+	//排序后
 	fmt.Println(values)
 	return
 }
