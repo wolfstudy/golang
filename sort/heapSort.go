@@ -23,15 +23,15 @@ func main() {
 }
 
 //交换函数
-func swap(i, j int,a[] int)  {
+func swap(i, j int, a [] int) {
 	a[i], a[j] = a[j], a[i];
 }
 
 //调整节点
-func headAdjust(a []int,start, end int)  {
+func headAdjust(a []int, start, end int) {
 	temp := a[start]
 
-	for i := 2*start+1; i <= end; i*=2  {
+	for i := 2*start + 1; i <= end; i *= 2 {
 		// 左右孩子的节点 2i+1. 2i+2
 
 		//选择出左右孩子较大的下标
@@ -44,7 +44,7 @@ func headAdjust(a []int,start, end int)  {
 		}
 
 		a[start] = a[i] //将子节点上移
-		start = i //重置，开启下一轮
+		start = i       //重置，开启下一轮
 	}
 
 	a[start] = temp //插入正确的位置
