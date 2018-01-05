@@ -2,6 +2,10 @@ package main
 
 import "fmt"
 
+/*
+   fallthrough 语句是不退出当前case 语段去实行下一个case 语段，且不去判断case 条件的去实行。
+ */
+
 func main() {
 	switch a := 3; {
 	case a >= 2:
