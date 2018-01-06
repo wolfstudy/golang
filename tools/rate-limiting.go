@@ -26,7 +26,7 @@ func main() {
 		fmt.Println("request", req, time.Now())
 	}
 
-	//同时允许有3个请求
+	//burstyLimiter通道将允许最多3个事件的突发
 	burstyLimiter := make(chan time.Time, 3)
 	for i := 0; i < 3; i++ {
 		burstyLimiter <- time.Now()
