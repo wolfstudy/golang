@@ -5,6 +5,8 @@ import (
 	"fmt"
 )
 
+
+//计算时间，主要注意time.Since（）的用法
 func main() {
 	StartCac()
 }
