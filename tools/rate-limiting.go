@@ -5,6 +5,10 @@ import (
 	"fmt"
 )
 
+/*
+	通过goroutines，channel和ticker都可以优雅地支持速率限制。
+ */
+
 func main() {
 
 	//限制我们传入的请求
@@ -21,7 +25,6 @@ func main() {
 		<-limiter
 		fmt.Println("request", req, time.Now())
 	}
-
 
 	//同时允许有3个请求
 	burstyLimiter := make(chan time.Time, 3)
