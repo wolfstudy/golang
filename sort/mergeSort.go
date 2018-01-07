@@ -2,12 +2,14 @@ package main
 
 import "fmt"
 
+//从上到下排序
 func MergeSortUTD(s []int) {
 	aux := make([]int, len(s))
 	mergeSortUTD(s, aux, 0, len(s)-1)
 
 }
 
+//从下到上排序
 func MergeSortDTU(s []int) {
 	aux := make([]int, len(s)) //辅助切片
 	n := len(s)
@@ -28,6 +30,7 @@ func mergeSortUTD(s, aux []int, lo, hi int) {
 	merge(s, aux, lo, mid, hi)
 }
 
+//真正交换的过程
 func merge(s, aux []int, lo, mid, hi int) {
 	for k := lo; k <= hi; k++ {
 		aux[k] = s[k]
@@ -52,6 +55,7 @@ func merge(s, aux []int, lo, mid, hi int) {
 
 }
 
+//求最小值函数
 func min(i, j int) int {
 	if j < i {
 		return j
@@ -59,6 +63,7 @@ func min(i, j int) int {
 	return i
 }
 
+//测试
 func main() {
 	fmt.Println("排序前：")
 	s := []int{9,0,6,5,8,2,1,7,4,3}
