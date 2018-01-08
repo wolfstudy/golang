@@ -2,6 +2,7 @@ package main
 
 import "github.com/gjson"
 
+//复杂的json比较推荐使用，的确方便。
 func main() {
 	json := `{
 	          "name":
