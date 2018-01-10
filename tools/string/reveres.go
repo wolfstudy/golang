@@ -3,10 +3,10 @@ package main
 import "fmt"
 
 /*
-	小端到大端的转化 16进制，两位一起。
+	小端到大端的转化 16进制，两位一起。btc 的大小端工具 //by wolf4j
  */
 func main() {
-	s := "dad4b83b82ea8a4e6100ebb9eff81bc25364c3531d9033afb2a35433c91dfc28"
+	s := "3a1c430e5c8719ef66525461a374d33849d60c07c5d198b16bdf788e3e046de6"
 	fmt.Println("length:", len(s))
 	fmt.Println("string:", revertString(s))
 }
