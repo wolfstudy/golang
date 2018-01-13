@@ -13,6 +13,7 @@ func handle(conn net.Conn) {
 	conn.Close()
 }
 
+//test main func
 func main() {
 	l, err := net.Listen("tcp", "8080")
 	if err!=nil {
