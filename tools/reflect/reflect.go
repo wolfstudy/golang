@@ -11,11 +11,18 @@ import (
 // 并且提供了两个函数来获取任意对象的Value和Type。
 
 
-//reflect.TypeOf可以获取任意对象的具体类型，
+
 func main() {
 	u := User{"make",20}
+
+	//reflect.TypeOf可以获取任意对象的具体类型，
 	t := reflect.TypeOf(u)
 	fmt.Println(t)
+
+	//
+	v := reflect.ValueOf(u)
+	fmt.Println(v)
+
 }
 
 type User struct {
