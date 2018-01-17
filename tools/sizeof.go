@@ -5,6 +5,7 @@ import (
 	"unsafe"
 )
 
+//Sizeof函数可以返回一个类型所占用的内存大小，这个大小只有类型有关，和类型对应的变量存储的内容大小无关，
 func main() {
 	fmt.Println(unsafe.Sizeof(true))
 	fmt.Println(unsafe.Sizeof(int8(0)))
