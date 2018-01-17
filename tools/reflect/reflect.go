@@ -19,7 +19,7 @@ func main() {
 	t := reflect.TypeOf(u)
 	fmt.Println(t)
 
-	//
+	//reflect.TypeOf函数接受一个空接口interface{}作为参数，所以这个方法可以接受任何类型的对象。
 	v := reflect.ValueOf(u)
 	fmt.Println(v)
 
