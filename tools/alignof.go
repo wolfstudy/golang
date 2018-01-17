@@ -24,3 +24,16 @@ func main() {
 	fmt.Println(unsafe.Alignof(m))
 	fmt.Println(unsafe.Alignof(p))
 }
+
+//对齐值一般是2^n,最大不会超过8
+
+/*
+1
+1
+2
+8
+4
+8
+8
+8
+ */
