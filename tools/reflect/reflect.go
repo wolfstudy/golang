@@ -15,6 +15,8 @@ import (
 func main() {
 	u := User{"make",20}
 
+	//通过reflect.ValueOf函数把任意类型的对象转为一个reflect.Value
+
 	//reflect.TypeOf可以获取任意对象的具体类型，
 	t := reflect.TypeOf(u)
 	fmt.Println(t)
@@ -22,6 +24,14 @@ func main() {
 	//reflect.TypeOf函数接受一个空接口interface{}作为参数，所以这个方法可以接受任何类型的对象。
 	v := reflect.ValueOf(u)
 	fmt.Println(v)
+
+	//将上述过程逆转回来
+
+	//reflect.Value为我们提供了Inteface方法来帮我们做这个事情
+	u1:= v.Interface().(User)
+	fmt.Println(u1)
+
+	
 
 }
 
