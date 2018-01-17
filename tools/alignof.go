@@ -5,6 +5,7 @@ import (
 	"unsafe"
 )
 
+//Alignof返回一个类型的对齐值，也可以叫做对齐系数或者对齐倍数。
 func main() {
 	var b bool
 	var i8 int8
