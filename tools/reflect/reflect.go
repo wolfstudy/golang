@@ -36,6 +36,9 @@ func main() {
 	//如何从一个reflect.Value获取对应的reflect.Type。
 	t1 := v.Type()
 	fmt.Println(t1)
+
+	fmt.Println("==============底层类型===============")
+	fmt.Println(t.Kind())
 }
 
 type User struct {
