@@ -5,7 +5,7 @@ import (
 	"fmt"
 )
 
-//为了提高map的顺序，map是无序的。
+//为了提高map的顺序，map是无序的。这个和hashmap的道理是一样的，无序会提高效率
 func main() {
 	m := make(map[string]string)
 
