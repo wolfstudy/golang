@@ -22,6 +22,8 @@ func main() {
 
 }
 
+//go是基于c语言的，所以可以访问到内存地址，不像java只能访问到hashcode，需要注意
+
 func icpr(p *int) int {
 	*p++
 	return *p
