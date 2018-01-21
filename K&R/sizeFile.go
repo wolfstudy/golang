@@ -8,6 +8,7 @@ import (
 	"path/filepath"
 )
 
+//练习使用gorutine
 func main() {
 	flag.Parse()
 	roots := flag.Args()
