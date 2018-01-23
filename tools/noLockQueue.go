@@ -51,3 +51,10 @@ func minQuantity(v uint32) uint32 {
 	v++
 	return v
 }
+
+func (q *EsQueue) String() string {
+	getPos := atomic.LoadUint32(&q.getPos)
+	putPos := atomic.LoadUint32(&q.putPos)
+	return fmt.Sprintf("Queue{capaciity: %v, capMod: %v, putPos: %v, getPos: %v}",
+		q.capaciity, q.capMod, putPos, getPos)
+}
