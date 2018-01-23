@@ -3,7 +3,6 @@ package main
 import (
 	"sync/atomic"
 	"fmt"
-	"runtime"
 )
 
 type esCache struct {
@@ -57,4 +56,24 @@ func (q *EsQueue) String() string {
 	putPos := atomic.LoadUint32(&q.putPos)
 	return fmt.Sprintf("Queue{capaciity: %v, capMod: %v, putPos: %v, getPos: %v}",
 		q.capaciity, q.capMod, putPos, getPos)
+}
+
+
+func (q *EsQueue) Capaciity() uint32 {
+	return q.capaciity
+}
+
+func (q *EsQueue) Quantity() uint32 {
+	var putPos, getPos uint32
+	var quantity uint32
+	getPos = atomic.LoadUint32(&q.getPos)
+	putPos = atomic.LoadUint32(&q.putPos)
+
+	if putPos >= getPos {
+		quantity = putPos - getPos
+	} else {
+		quantity = q.capMod + (putPos - getPos)
+	}
+
+	return quantity
 }
