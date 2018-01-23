@@ -119,3 +119,45 @@ func (q *EsQueue) Put(val interface{}) (ok bool, quantity uint32) {
 		}
 	}
 }
+
+
+// get queue functions
+func (q *EsQueue) Get() (val interface{}, ok bool, quantity uint32) {
+	var putPos, getPos, getPosNew, posCnt uint32
+	var cache *esCache
+	capMod := q.capMod
+
+	putPos = atomic.LoadUint32(&q.putPos)
+	getPos = atomic.LoadUint32(&q.getPos)
+
+	if putPos >= getPos {
+		posCnt = putPos - getPos
+	} else {
+		posCnt = capMod + (putPos - getPos)
+	}
+
+	if posCnt < 1 {
+		runtime.Gosched()
+		return nil, false, posCnt
+	}
+
+	getPosNew = getPos + 1
+	if !atomic.CompareAndSwapUint32(&q.getPos, getPos, getPosNew) {
+		runtime.Gosched()
+		return nil, false, posCnt
+	}
+
+	cache = &q.cache[getPosNew&capMod]
+
+	for {
+		getNo := atomic.LoadUint32(&cache.getNo)
+		putNo := atomic.LoadUint32(&cache.putNo)
+		if getPosNew == getNo && getNo == putNo-q.capaciity {
+			val = cache.value
+			atomic.AddUint32(&cache.getNo, q.capaciity)
+			return val, true, posCnt - 1
+		} else {
+			runtime.Gosched()
+		}
+	}
+}
