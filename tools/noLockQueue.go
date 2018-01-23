@@ -6,6 +6,7 @@ import (
 	"runtime"
 )
 
+//无锁队列
 type esCache struct {
 	putNo uint32
 	getNo uint32
