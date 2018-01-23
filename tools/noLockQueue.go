@@ -3,6 +3,7 @@ package main
 import (
 	"sync/atomic"
 	"fmt"
+	"runtime"
 )
 
 type esCache struct {
@@ -76,4 +77,45 @@ func (q *EsQueue) Quantity() uint32 {
 	}
 
 	return quantity
+}
+
+// put queue functions
+func (q *EsQueue) Put(val interface{}) (ok bool, quantity uint32) {
+	var putPos, putPosNew, getPos, posCnt uint32
+	var cache *esCache
+	capMod := q.capMod
+
+	getPos = atomic.LoadUint32(&q.getPos)
+	putPos = atomic.LoadUint32(&q.putPos)
+
+	if putPos >= getPos {
+		posCnt = putPos - getPos
+	} else {
+		posCnt = capMod + (putPos - getPos)
+	}
+
+	if posCnt >= capMod-1 {
+		runtime.Gosched()
+		return false, posCnt
+	}
+
+	putPosNew = putPos + 1
+	if !atomic.CompareAndSwapUint32(&q.putPos, putPos, putPosNew) {
+		runtime.Gosched()
+		return false, posCnt
+	}
+
+	cache = &q.cache[putPosNew&capMod]
+
+	for {
+		getNo := atomic.LoadUint32(&cache.getNo)
+		putNo := atomic.LoadUint32(&cache.putNo)
+		if putPosNew == putNo && getNo == putNo {
+			cache.value = val
+			atomic.AddUint32(&cache.putNo, q.capaciity)
+			return true, posCnt + 1
+		} else {
+			runtime.Gosched()
+		}
+	}
 }
