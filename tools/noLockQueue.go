@@ -8,7 +8,7 @@ import (
 
 //无锁队列
 
-//队列实现主要是put和get这两个方法 
+//队列实现主要是put和get这两个方法
 type esCache struct {
 	putNo uint32
 	getNo uint32
