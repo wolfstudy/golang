@@ -151,3 +151,33 @@ func testQueueGeneral(t *testing.T, grp, cnt int) int {
 	}
 	return int(miss)
 }
+
+func TestQueueGeneral(t *testing.T) {
+	runtime.GOMAXPROCS(runtime.NumCPU())
+	const (
+		isPrintf = false
+	)
+
+	var miss, Sum int
+	var Use time.Duration
+	for i := 1; i <= runtime.NumCPU()*4; i++ {
+		cnt := 10000 * 100
+		if i > 9 {
+			cnt = 10000 * 10
+		}
+		sum := i * cnt
+		start := time.Now()
+		miss = testQueueGeneral(t, i, cnt)
+		end := time.Now()
+		use := end.Sub(start)
+		op := use / time.Duration(sum)
+		fmt.Printf("%v, Grp: %3d, Times: %10d, miss:%6v, use: %12v, %8v/op\n",
+			runtime.Version(), i, sum, miss, use, op)
+		Use += use
+		Sum += sum
+	}
+	op := Use / time.Duration(Sum)
+	fmt.Printf("%v, Grp: %3v, Times: %10d, miss:%6v, use: %12v, %8v/op\n",
+		runtime.Version(), "Sum", Sum, 0, Use, op)
+}
+
