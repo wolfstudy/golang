@@ -82,3 +82,27 @@ func testQueuePutGet(t *testing.T, grp, cnt int) (
 	}
 	return put, get
 }
+
+func TestQueuePutGet(t *testing.T) {
+	runtime.GOMAXPROCS(runtime.NumCPU())
+	const (
+		isPrintf = false
+	)
+
+	cnt := 10000
+	sum := 0
+	start := time.Now()
+	var putD, getD time.Duration
+	for i := 0; i <= runtime.NumCPU()*4; i++ {
+		sum += i * cnt
+		put, get := testQueuePutGet(t, i, cnt)
+		putD += put
+		getD += get
+	}
+	end := time.Now()
+	use := end.Sub(start)
+	op := use / time.Duration(sum)
+	t.Logf("Grp: %d, Times: %d, use: %v, %v/op", runtime.NumCPU()*4, sum, use, op)
+	t.Logf("Put: %d, use: %v, %v/op", sum, putD, putD/time.Duration(sum))
+	t.Logf("Get: %d, use: %v, %v/op", sum, getD, getD/time.Duration(sum))
+}
