@@ -265,5 +265,56 @@ func TestQueuePutGoGet(t *testing.T) {
 		runtime.Version(), "Sum", Sum, 0, Use, op)
 }
 
+func testQueuePutDoGet(t *testing.T, grp, cnt int) int {
+	var wg sync.WaitGroup
+	//var Qt = newQtSum(grp)
+	wg.Add(grp)
+	q := NewQueue(1024 * 1024)
+	for i := 0; i < grp; i++ {
+		go func(g int) {
+			ok := false
+			for j := 0; j < cnt; j++ {
+				ok, _ = q.Put(&value)
+				//var missPut int32
+				for !ok {
+					//Qt.Go[g].getMiss++
+					//missPut++
+					//time.Sleep(time.Microsecond)
+					ok, _ = q.Put(&value)
+					//if missPut > 10000 {
+					//	panic(fmt.Sprintf("Put Fail PutId:%12v, GetId:%12v, "+
+					//		"putCnt:%12v, putMis:%12v, "+
+					//		"getCnt:%12v, getMis:%12v\n",
+					//		q.eqPut, q.eqGet, Qt.PutCnt(), Qt.PutMiss(), Qt.GetCnt(), Qt.GetMiss()))
+					//}
+				}
+				//Qt.Go[g].putCnt++
+
+				//var missGet int32
+				_, ok, _ = q.Get() //该语句注释掉将导致运行结果不正确
+				for !ok {
+					//Qt.Go[g].putMiss++
+					//missGet++
+					//time.Sleep(time.Microsecond * 100)
+					_, ok, _ = q.Get()
+					//if missGet > 10000 {
+					//	panic(fmt.Sprintf("Get Miss PutId:%12v, GetId:%12v, "+
+					//		"putCnt:%12v, putMis:%12v, "+
+					//		"getCnt:%12v, getMis:%12v\n",
+					//		q.eqPut, q.eqGet, Qt.PutCnt(), Qt.PutMiss(),
+					//		Qt.GetCnt(), Qt.GetMiss()))
+					//}
+					//printf("Get.Fail\n")
+				}
+				//Qt.Go[g].getCnt++
+			}
+			wg.Done()
+		}(i)
+	}
+	wg.Wait()
+	return 0 //int(Qt.PutMiss()) + int(Qt.GetMiss())
+}
+
+
 
 
