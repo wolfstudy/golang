@@ -400,3 +400,13 @@ type QtObj struct {
 	putCnt  int32
 	getCnt  int32
 }
+
+type QtSum struct {
+	Go []QtObj
+}
+
+func newQtSum(grp int) *QtSum {
+	qt := new(QtSum)
+	qt.Go = make([]QtObj, grp)
+	return qt
+}
