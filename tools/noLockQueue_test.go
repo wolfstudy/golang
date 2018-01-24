@@ -424,3 +424,17 @@ func (q *QtSum) PutMiss() (num int32) {
 	}
 	return
 }
+
+func (q *QtSum) PutCnt() (num int32) {
+	for i := range q.Go {
+		num += q.Go[i].putCnt
+	}
+	return
+}
+
+func (q *QtSum) GetCnt() (num int32) {
+	for i := range q.Go {
+		num += q.Go[i].getCnt
+	}
+	return
+}
