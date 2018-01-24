@@ -342,5 +342,47 @@ func TestQueuePutDoGet(t *testing.T) {
 		runtime.Version(), "Sum", Sum, 0, Use, op)
 }
 
+func testQueuePutGetOrder(t *testing.T, grp, cnt int) (
+	residue int) {
+	var wg sync.WaitGroup
+	var idPut, idGet int32
+	wg.Add(grp)
+	q := NewQueue(1024 * 1024)
+	for i := 0; i < grp; i++ {
+		go func(g int) {
+			defer wg.Done()
+			for j := 0; j < cnt; j++ {
+				v := atomic.AddInt32(&idPut, 1)
+				ok, _ := q.Put(v)
+				for !ok {
+					time.Sleep(time.Microsecond)
+					ok, _ = q.Put(v)
+				}
+			}
+		}(i)
+	}
+	wg.Wait()
+	wg.Add(grp)
+	for i := 0; i < grp; i++ {
+		go func() {
+			defer wg.Done()
+			for j := 0; j < cnt; {
+				val, ok, _ := q.Get()
+				if !ok {
+					fmt.Printf("Get.Fail\n")
+					runtime.Gosched()
+				} else {
+					j++
+					idGet++
+					if idGet != val.(int32) {
+						t.Logf("Get.Err %d <> %d\n", idGet, val)
+					}
+				}
+			}
+		}()
+	}
+	wg.Wait()
+	return
+}
 
 
