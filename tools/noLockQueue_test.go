@@ -106,3 +106,48 @@ func TestQueuePutGet(t *testing.T) {
 	t.Logf("Put: %d, use: %v, %v/op", sum, putD, putD/time.Duration(sum))
 	t.Logf("Get: %d, use: %v, %v/op", sum, getD, getD/time.Duration(sum))
 }
+
+func testQueueGeneral(t *testing.T, grp, cnt int) int {
+
+	var wg sync.WaitGroup
+	var idPut, idGet int32
+	var miss int32
+
+	wg.Add(grp)
+	q := NewQueue(1024 * 1024)
+	for i := 0; i < grp; i++ {
+		go func(g int) {
+			defer wg.Done()
+			for j := 0; j < cnt; j++ {
+				val := fmt.Sprintf("Node.%d.%d.%d", g, j, atomic.AddInt32(&idPut, 1))
+				ok, _ := q.Put(&val)
+				for !ok {
+					time.Sleep(time.Microsecond)
+					ok, _ = q.Put(&val)
+				}
+			}
+		}(i)
+	}
+
+	wg.Add(grp)
+	for i := 0; i < grp; i++ {
+		go func(g int) {
+			defer wg.Done()
+			ok := false
+			for j := 0; j < cnt; j++ {
+				_, ok, _ = q.Get() //该语句注释掉将导致运行结果不正确
+				for !ok {
+					atomic.AddInt32(&miss, 1)
+					time.Sleep(time.Microsecond * 50)
+					_, ok, _ = q.Get()
+				}
+				atomic.AddInt32(&idGet, 1)
+			}
+		}(i)
+	}
+	wg.Wait()
+	if q := q.Quantity(); q != 0 {
+		t.Errorf("Grp:%v, Quantity Error: [%v] <>[%v]", grp, q, 0)
+	}
+	return int(miss)
+}
