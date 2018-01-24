@@ -385,4 +385,11 @@ func testQueuePutGetOrder(t *testing.T, grp, cnt int) (
 	return
 }
 
+func TestQueuePutGetOrder(t *testing.T) {
+	runtime.GOMAXPROCS(runtime.NumCPU())
+	grp := 1
+	cnt := 100
 
+	testQueuePutGetOrder(t, grp, cnt)
+	t.Logf("Grp: %d, Times: %d", grp, cnt)
+}
