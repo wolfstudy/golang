@@ -410,3 +410,10 @@ func newQtSum(grp int) *QtSum {
 	qt.Go = make([]QtObj, grp)
 	return qt
 }
+
+func (q *QtSum) GetMiss() (num int32) {
+	for i := range q.Go {
+		num += q.Go[i].getMiss
+	}
+	return
+}
