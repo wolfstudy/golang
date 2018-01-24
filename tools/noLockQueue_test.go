@@ -393,3 +393,10 @@ func TestQueuePutGetOrder(t *testing.T) {
 	testQueuePutGetOrder(t, grp, cnt)
 	t.Logf("Grp: %d, Times: %d", grp, cnt)
 }
+
+type QtObj struct {
+	getMiss int32
+	putMiss int32
+	putCnt  int32
+	getCnt  int32
+}
