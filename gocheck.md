@@ -138,3 +138,5 @@ func (s *MySuite) TestFoo(c *C) {
     c.Assert(clusterName, Equals, "MiniLVSCluster-5e87-2384205713506559")
 }
 ```
+
+## 如何获取gocheck
