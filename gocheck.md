@@ -154,3 +154,8 @@ To ensure you're using the latest version, run the following instead:
 go get -u gopkg.in/check.v1
 
 ```
+
+##小心得
+
+如果你想把 gocheck这个项目内嵌到自己的项目中，OK，你可以把 gocheck fork到自己的github下，然后，修改其相应的路径。即可
+
