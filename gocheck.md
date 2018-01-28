@@ -195,3 +195,15 @@ c.Assert(err, Matches, "perm.*denied")
 c.Assert(iface, NotNil)
 c.Assert(func() { f(1, 2) }, PanicMatches, `open.*: no such file or directory`).
 ```
+
+###另一个接口
+
+```$xslt
+func Not(checker Checker) Checker
+```
+
+### 用法
+
+```$xslt
+c.Assert(a, Not(Equals), b)
+```
