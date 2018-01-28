@@ -159,3 +159,22 @@ go get -u gopkg.in/check.v1
 
 如果你想把 gocheck这个项目内嵌到自己的项目中，OK，你可以把 gocheck fork到自己的github下，然后，修改其相应的路径。即可
 
+## Assert方法
+
+```$xslt
+func (c *C) Assert(obtained interface{}, checker Checker, args ...interface{})
+```
+
+这个方法来判断,内置的 Check 接口实现有:
+
+* DeepEquals
+* Equals
+* ErrorMatches
+* FitsTypeOf
+* HasLen
+* Implements
+* IsNil
+* Matches
+* NotNil
+* PanicMatches
+
