@@ -147,3 +147,10 @@ Install gocheck's check package with the following command:
 go get gopkg.in/check.v1
 
 ```
+
+To ensure you're using the latest version, run the following instead:
+
+```$xslt
+go get -u gopkg.in/check.v1
+
+```
