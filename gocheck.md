@@ -178,3 +178,20 @@ func (c *C) Assert(obtained interface{}, checker Checker, args ...interface{})
 * NotNil
 * PanicMatches
 
+### 使用例子
+
+```$xslt
+c.Assert(value, DeepEquals, 42)
+c.Assert(array, DeepEquals, []string{"hi", "there"})
+c.Assert(value, Equals, 42)
+c.Assert(err, ErrorMatches, "perm.*denied")
+c.Assert(value, FitsTypeOf, int64(0))
+c.Assert(value, FitsTypeOf, os.Error(nil))
+c.Assert(list, HasLen, 5)
+var e os.Error
+c.Assert(err, Implements, &e)
+c.Assert(err, IsNil)
+c.Assert(err, Matches, "perm.*denied")
+c.Assert(iface, NotNil)
+c.Assert(func() { f(1, 2) }, PanicMatches, `open.*: no such file or directory`).
+```
