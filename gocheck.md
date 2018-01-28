@@ -140,3 +140,10 @@ func (s *MySuite) TestFoo(c *C) {
 ```
 
 ## 如何获取gocheck
+
+Install gocheck's check package with the following command:
+
+```$xslt
+go get gopkg.in/check.v1
+
+```
