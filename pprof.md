@@ -12,3 +12,5 @@
 * thread是分析线程的，应用的相对少一点
 
 关于pprof官方文档描述的比较详细，所以不做过多的叙述：
+
+[pprof官方文档](https://blog.golang.org/profiling-go-programs)
