@@ -22,6 +22,8 @@
 
 ### go imports
 
+>注意和go get区分，go import是本地已经存在的，可以使用go import引入进来。
+
 ### go generate
 
 ### go vet
