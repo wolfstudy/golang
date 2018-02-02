@@ -3,3 +3,5 @@
 ### go build
 
 ### go test
+
+### go run
