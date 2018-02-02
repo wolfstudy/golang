@@ -16,6 +16,8 @@
 
 ### go get
 
+>用来获取本地项目需要的一些package，从远程拉取。
+
 ### go imports
 
 ### go generate
