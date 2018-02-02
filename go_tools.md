@@ -5,3 +5,8 @@
 ### go test
 
 ### go run
+
+### go fmt
+
+### go get
+
