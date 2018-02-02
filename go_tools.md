@@ -11,3 +11,5 @@
 ### go get
 
 ### go imports
+
+### go generate
