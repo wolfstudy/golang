@@ -13,3 +13,5 @@
 ### go imports
 
 ### go generate
+
+### go vet
