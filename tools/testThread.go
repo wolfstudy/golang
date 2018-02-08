@@ -6,6 +6,7 @@ func hello()  {
 	fmt.Println("hello heihei")
 }
 
+//input :main func
 func main() {
 	go hello()
 	fmt.Println("main func")
@@ -19,3 +20,4 @@ func main() {
 2.如果希望运行其他 Go 协程，Go 主协程必须继续运行着。
 如果 Go 主协程终止，则程序终止，于是其他 Go 协程也不会继续运行。
  */
+
