@@ -24,6 +24,10 @@ func hello()  {
 如果 Go 主协程终止，则程序终止，于是其他 Go 协程也不会继续运行。
  */
 
+ /**
+ input: hello heihei
+		main func
+  */
 func main() {
 	go hello()
 	time.Sleep(time.Second*1)
