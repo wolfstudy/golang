@@ -1,16 +1,19 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
 func hello()  {
 	fmt.Println("hello heihei")
 }
 
 //input :main func
-func main() {
-	go hello()
-	fmt.Println("main func")
-}
+//func main() {
+//	go hello()
+//	fmt.Println("main func")
+//}
 
 /**
 该程序只会输出文本 main function。我们启动的 Go 协程究竟出现了什么问题？
@@ -20,4 +23,10 @@ func main() {
 2.如果希望运行其他 Go 协程，Go 主协程必须继续运行着。
 如果 Go 主协程终止，则程序终止，于是其他 Go 协程也不会继续运行。
  */
+
+func main() {
+	go hello()
+	time.Sleep(time.Second*1)
+	fmt.Println("main func")
+}
 
