@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-//在golang中有三个地方比较容易犯错，所有这三个错误都是在Kubernetes代码中发现的。
+//在golang中有三个地方比较容易犯错。
 
 
 /*
