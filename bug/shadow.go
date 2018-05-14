@@ -20,7 +20,8 @@ func testSome(reallyDoIt bool) (err error) {
 	return err
 }
 
-//函数返回值中（err error）已经定义err，但是在函数内部，又重新定义err，返回值中的err会遮蔽 := 定义的err。
+//函数返回值中（err error）已经定义err，但是在函数内部，又重新定义err，返回值中的err会遮蔽 := 定义的err,也就是说他们的名字一样，
+// 但是实际的操作是不同的。
 
 func trytheThing() (string, error) {
 	return "hahah", errors.New("hello world")
