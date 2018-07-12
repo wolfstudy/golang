@@ -10,9 +10,9 @@ type Onces struct {
 	done int32
 }
 func (o *Onces) Do(f func()) {
-	if atomic.LoadInt32(&o.done) == 1 {
-		return
-	}
+	//if atomic.LoadInt32(&o.done) == 1 {
+	//	return
+	//}
 	// Slow-path.
 	if atomic.CompareAndSwapInt32(&o.done, 0, 1) {
 		f()
