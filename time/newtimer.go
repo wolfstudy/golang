@@ -11,7 +11,7 @@ func main() {
 
 	//当前时间
 	now := time.Now()
-	fmt.Println("now time: %v", now)
+	fmt.Printf("now time: %v", now)
 
 	expire := <-t.C
 	fmt.Printf("Expiration time: %v.\n", expire)
