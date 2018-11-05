@@ -1,0 +1,31 @@
+package main
+
+import (
+	"encoding/hex"
+	"github.com/btcsuite/btcd/wire"
+	"bytes"
+	"fmt"
+)
+
+func main() {
+	txstr := "0200000002438e2ab0cc34e1ec684a7d2119753ca088c46ee7574668d577b53eeb6926f752030000008b483045022100e4c82b4ed6c625a54cd935ddc0f5993a097800300807ae7fe3e20c5abce9bfcc02202dc3509b5a26a7c7b8cc55d757b1e067ecd3cb1f63e5b28d3371e2a67bf5be29414104968618754fd8d8e83909fa1430292c872a83a40d999c77636d6d4dc775c256ec33da744722d85f5d15717a4f6b7b983301122891ede5af2250e49b6a3e5b1cecffffffff106130ad4de4adbf2509ad1f18e3cf8f3ccf449ef8fd2a636a0f3c695b731f30020000008b483045022100ac1ac30304d8bca14d3aa1c61c9aa74190c0557cf328f2d594a758dc80fb24ac02201121c4c97decd7d4624f638d57b28429c3833d9464707ed3f9f65ad11c30f4534141040baa4271a82c5f1a09a5ea63d763697ca0545b6049c4dd8e8d099dd91f2da10eb11e829000a82047ac56969fb582433067a21c3171e569d1832c34fdd793cfc8ffffffff0320770e00000000001976a91439ab3c52b317e9906aaf9c91b6421c4f24bfd7c888ac0000000000000000466a445bd33ebccb1453afdd207ad23f6274c514f60f7ae46ede7cd82e417f6c42b42252f72669eb3eb577d5684657e76ec488a03c7519217d4a68ece134ccb02a8e4300000003cb82160b000000001976a9148b80536aa3c460258cda834b86a46787c9a2b0bf88ac00000000"
+	b, err := hex.DecodeString(txstr)
+	if err != nil {
+		fmt.Errorf("err:%v",err)
+	}
+
+	var tx wire.MsgTx
+	err = tx.Deserialize(bytes.NewBuffer(b))
+	if err != nil {
+		fmt.Errorf("err:%v",err)
+	}
+
+	opcodes, err := parseScript(tx.TxIn[0].SignatureScript)
+	if err != nil {
+		fmt.Errorf("err:%v",err)
+	}
+
+	for _, op := range opcodes {
+		fmt.Println(hex.EncodeToString(op.data))
+	}
+}
