@@ -18,5 +18,11 @@ func (q *Queue) EnQueue(value interface{}) {
 }
 
 func (q *Queue) DeQueue() interface{} {
-	
+	queueLen := len(q.Iterm)
+	if queueLen == 0 {
+		return nil
+	}
+	firstIterm := q.Iterm[0]
+	q.Iterm = q.Iterm[1:]
+	return firstIterm
 }
